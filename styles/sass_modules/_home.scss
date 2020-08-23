@@ -1,0 +1,108 @@
+
+.container{
+    margin: 3%;
+    height: calc(100vh - 80px);
+  
+    @include flex(display, flex);
+    @include flex(flex-direction, row);
+  
+    //media queries
+    @media only screen and (min-width:1450px) {
+      height:100vh;
+      @include flex(justify-content, center);
+      @include flex(align-items, center);
+    }
+  
+    @include medium {
+      margin:80px 0 0;
+  
+      @include flex(display, flex);
+      @include flex(flex-direction, column);
+      @include flex(justify-content, flex-start);
+      @include flex(align-items, center);
+    }
+  
+    @include small {
+      @include flex(justify-content, flex-start);
+  
+      margin-top: 10px;
+    }//media queries
+  
+    .title-container{
+      //media queries
+      @include small {
+        margin-top: 10px;
+      }//media queries  
+    }
+    div {
+      &.title-container{
+        margin:$margin-lg-screens;
+      }
+      &.headline{
+        color:$secondary-color;
+        // color:transparent;
+        // background: linear-gradient($linear-gradient);
+        // background-size: 500%;
+        // background-clip: text;
+        // -webkit-background-clip: text;
+        // animation: moveBackground 5s linear infinite alternate;
+  
+  
+  
+        font-size: 6rem;
+        text-align: left;
+        // margin-left: 1%;
+  
+        //media queries
+        @include medium {
+          margin-top: 0px;
+        }//media queries
+      }
+      &.headline1{
+        // font-weight: bold;
+        letter-spacing: 8px;
+        font-size: 6.3rem;
+  
+        //media queries
+        @include small {
+          margin-top: 0;
+        }//media queries
+      }
+      &.headline2{
+        margin-top: 0px;
+        opacity: 0.6;
+      }
+      &.subtitle{
+        // margin-left: 1.5%;
+        text-transform: uppercase;
+        font-size: 1.4rem;
+        letter-spacing: 2.3px;
+        margin-top: 10px;
+      }
+    }
+    .img-intro {
+  
+      @include flex(flex-shrink, 1);
+      @include flex(align-self, center);
+  
+      width: 900px;
+      opacity: 0.8;
+      transform: rotateY(180deg);
+  
+      //media queries
+      @media only screen and (min-width:1450px){
+        display: none;
+      }
+  
+      @include medium {
+        margin-top: 60px;
+        width:400px;
+        @include flex(align-self, center);
+      }
+      @include small {
+        margin:30px auto;
+        width: 300px;
+      }//media queries
+    }
+  }
+

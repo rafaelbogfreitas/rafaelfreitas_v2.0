@@ -1,11 +1,28 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.scss'
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { increaseCounter, decreaseCounter } from "../redux/actions/counter"
 export default function Home() {
+
+  const dispatch = useDispatch();
+  const { count } = useSelector(state => state.count);
+
+  const increaseCount = () => {
+    dispatch(increaseCounter())
+  }
+
+  const decreaseCount = () => {
+    dispatch(decreaseCounter())
+  }
+
   return (
-    <div className={styles.container}>
-      <h1 className={styles.header}>HEADER</h1>
+    <div>
+      <Head>
+        <title>Rafael</title>
+      </Head>
+      <h1>{count}</h1>
+      <button onClick={increaseCount}>INCREASE</button>
+      <button onClick={decreaseCount}>DECREASE</button>
+      <img src="./images/rafael.svg" />
     </div>
   )
 }
