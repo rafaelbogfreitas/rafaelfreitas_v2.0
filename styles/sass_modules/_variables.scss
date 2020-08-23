@@ -1,0 +1,12 @@
+$main_color: black;
+$secondary-color: orange;
+$backgrounds-color:white;
+
+$linear-gradient: to right, $secondary-color, lighten($secondary-color, 5%), lighten($secondary-color, 10%), lighten($secondary-color, 20%), lighten($secondary-color, 30%), orange;
+
+//margins
+
+$margin-lg-screens: 20px;
+
+//fonts
+$font-xlarge:8rem;

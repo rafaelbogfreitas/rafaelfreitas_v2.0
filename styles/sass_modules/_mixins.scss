@@ -1,0 +1,28 @@
+
+//flex-box vendor prefixes mixin
+@mixin flex($property, $value){
+  #{$property}: $value;
+  -moz-#{$property}: $value;
+  -webkit-#{$property}: $value;
+  -ms-#{$property}: $value;
+}
+
+//mixins for mediqueries breakpoints
+@mixin extraLg {
+  @media only screen and (min-width: 1001px) {@content};
+}
+@mixin large {
+  @media only screen and (max-width:1000px) {@content};
+}
+@mixin medium {
+  @media only screen and (max-width:900px) {@content};
+}
+@mixin  small {
+  @media only screen and (max-width:500px) {@content};
+}
+
+@mixin break ($value) {
+  @media only screen and (max-width: $value){
+    @content;
+  }
+}

@@ -1,0 +1,17 @@
+
+//stop displaying an element
+.hidden{
+  display:none !important;
+}
+
+.hide {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 2%!important;
+}
+
+.turn90 {
+  transform:rotate(90deg);
+  transform-origin: center;
+  transition: transform 0.2s linear;
+}

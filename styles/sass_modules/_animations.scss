@@ -1,0 +1,59 @@
+@keyframes slideNFade {
+    0%{
+        opacity:1;
+        transform:translateX(0);
+    }
+    
+    100%{
+        opacity:0;
+        transform:translateX(-100%);
+    }
+}
+
+@keyframes doubleScale {
+    100%{
+        transform: scale(2) translateY(30%) translateX(40%);
+    }
+}
+
+@keyframes upNRight {
+    100% {
+        position: relative;
+        transform:scale(2.1) 
+                translateX(150%) 
+                translateY(-18%); 
+                // rotateY(180deg);
+        font-weight: bold;
+    }
+}
+
+@keyframes opacity {
+    0%{
+        opacity:1;
+    }
+    100% {
+        opacity:0;
+    }
+}
+
+//Motion Design animation for GitHub icon
+@keyframes pulse {
+    0% {
+        transform:scale(1);
+    }
+    5% {
+        transform:scale(1.2);
+    }
+    10% {
+        transform:scale(1);
+    }
+    15% {
+        transform:scale(1.2);
+    }
+    20% {
+        transform:scale(1);
+    }
+    100% {
+        transform:scale(1);
+    }
+}
