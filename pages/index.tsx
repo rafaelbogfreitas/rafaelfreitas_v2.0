@@ -1,10 +1,13 @@
 import Head from 'next/head'
 import { useDispatch, useSelector } from "react-redux";
+import { ApplicationState } from "../redux/store";
 import { increaseCounter, decreaseCounter } from "../redux/actions/counter"
 export default function Home() {
 
   const dispatch = useDispatch();
-  const { count } = useSelector(state => state.count);
+  const { count } = useSelector((state: ApplicationState) => ({
+    count: state.count
+  }));
 
   const increaseCount = () => {
     dispatch(increaseCounter())

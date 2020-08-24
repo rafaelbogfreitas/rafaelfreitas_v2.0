@@ -6,19 +6,13 @@ const {
   DECREASE_COUNTER
 } = Types;
 
-export default ( state = INITIAL_STATE, action ) => {
+export default ( state = INITIAL_STATE.count, action ) => {
   switch (action.type) {
     case INCREASE_COUNTER:
-      return {
-        ...state,
-        count: state.count + action.payload
-      }
+      return  state + action.payload
       break;
     case DECREASE_COUNTER:
-      return {
-        ...state,
-        count: state.count + action.payload
-      }
+      return  state + action.payload
       break;
     default:
       return state;
