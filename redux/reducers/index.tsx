@@ -1,10 +1,11 @@
+import { combineReducers } from 'redux'
 
-import { combineReducers } from 'redux';
-
-import Counter from "./counter";
+import Counter from './counter'
+import Projects from './projects'
 
 const reducers = combineReducers({
-  count: Counter
-});
+  count: Counter,
+  projects: Projects,
+})
 
-export default reducers;
+export default reducers

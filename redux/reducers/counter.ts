@@ -1,20 +1,34 @@
-import { INITIAL_STATE } from "../states";
-import { Types } from "../actions/types";
+import { DECREASE_COUNTER, INCREASE_COUNTER } from '../actions/counter/constants'
+import { counterDispatchTypes } from '../actions/counter/counter'
 
-const {
-  INCREASE_COUNTER,
-  DECREASE_COUNTER
-} = Types;
+interface INITIAL_STATE {
+  count: number
+}
 
-export default ( state = INITIAL_STATE.count, action ) => {
+const defaultState: INITIAL_STATE = {
+  count: 0,
+}
+
+export const counterReducer = (
+  state = defaultState,
+  action: counterDispatchTypes
+): INITIAL_STATE => {
   switch (action.type) {
     case INCREASE_COUNTER:
-      return  state + action.payload
-      break;
+      return {
+        ...state,
+        count: state.count + action.payload,
+      }
+      break
     case DECREASE_COUNTER:
-      return  state + action.payload
-      break;
+      return {
+        ...state,
+        count: state.count - action.payload,
+      }
+      break
     default:
-      return state;
+      return state
   }
 }
+
+export default counterReducer
