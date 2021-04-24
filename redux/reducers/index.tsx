@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-import Counter from './counter'
-import Projects from './projects'
+import counter from './counter';
+import projects from './projects';
 
-const reducers = combineReducers({
-  count: Counter,
-  projects: Projects,
-})
+const rootReducer = combineReducers({
+  count: counter,
+  projects: projects,
+});
 
-export default reducers
+export default rootReducer;

@@ -1,27 +1,18 @@
-import { SET_PROJECTS } from '../actions/projects/constants'
+import { SET_PROJECTS } from '../actions/projects/constants';
 
-type INITIAL_STATE = {
-  projects: Projects[]
-}
-
-const defaultState: INITIAL_STATE = {
-  projects: [],
-}
+const defaultState: Projects[] = [];
 
 export const projectsReducer = (
   state = defaultState,
   action: projectsDispatchActions
-): INITIAL_STATE => {
+): typeof defaultState => {
   switch (action.type) {
     case SET_PROJECTS:
-      return {
-        ...state,
-        projects: action.payload,
-      }
-      break
+      return action.payload;
+      break;
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default projectsReducer
+export default projectsReducer;
