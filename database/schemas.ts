@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const { Schema } = mongoose
+const { Schema } = mongoose;
 
 export const projectSchema = new Schema(
   {
@@ -25,4 +25,4 @@ export const projectSchema = new Schema(
   {
     timestamps: true,
   }
-)
+);

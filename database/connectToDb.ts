@@ -1,20 +1,20 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const { MONGODB_URI, MONGODB_DB } = process.env
+const { MONGODB_URI, MONGODB_DB } = process.env;
 
 if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local')
+  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 }
 
 if (!MONGODB_DB) {
-  throw new Error('Please define the MONGODB_DB environment variable inside .env.local')
+  throw new Error('Please define the MONGODB_DB environment variable inside .env.local');
 }
 
-export default async () => {
+export default async (): Promise<void> => {
   try {
     if (mongoose.connections[0].readyState) {
-      console.log('Conectado')
-      return
+      console.log('Conectado');
+      return;
     }
 
     await mongoose.connect(
@@ -26,8 +26,8 @@ export default async () => {
         useNewUrlParser: true,
       },
       () => console.log(`Connected on: ${MONGODB_DB}`)
-    )
+    );
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
+};

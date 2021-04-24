@@ -1,12 +1,12 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const { model } = mongoose
+const { model } = mongoose;
 
 //schemas
-import { projectSchema } from './schemas'
+import { projectSchema } from './schemas';
 
-mongoose.models = {}
+mongoose.models = {};
 
-const Project = model('Project', projectSchema)
+const Project = model('Project', projectSchema);
 
-export default Project
+export default Project;

@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../redux/store';
 import { increaseCounter, decreaseCounter } from '../redux/actions/counter';
+import { ReactElement } from 'react';
 
 type Text = {
   ptBr: string;
@@ -26,7 +27,7 @@ type HomeProps = {
   projects: Projects[];
 };
 
-const Home = ({ projects }: HomeProps) => {
+const Home = ({ projects }: HomeProps): ReactElement => {
   const dispatch = useDispatch();
   const { count } = useSelector((state: RootStore) => state);
 
