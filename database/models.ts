@@ -5,7 +5,9 @@ const { model } = mongoose;
 //schemas
 import { projectSchema } from './schemas';
 
-mongoose.models = {};
+if (mongoose.modelNames().includes('Project')) {
+  mongoose.deleteModel('Project');
+}
 
 const Project = model('Project', projectSchema);
 

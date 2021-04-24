@@ -1,9 +1,12 @@
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
+import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../redux/store';
 import { increaseCounter, decreaseCounter } from '../redux/actions/counter';
 import { ReactElement } from 'react';
+import connectToDb from '../database/connectToDb';
+import Project from '../database/models';
 
 type Text = {
   ptBr: string;
@@ -47,20 +50,27 @@ const Home = ({ projects }: HomeProps): ReactElement => {
       <h1>{count}</h1>
       <button onClick={increaseCount}>INCREASE</button>
       <button onClick={decreaseCount}>DECREASE</button>
-      {projects[0]?.technologies.map((item, i) => (
-        <div key={i}>{item}</div>
+      {projects.map((item, i) => (
+        <div key={i}>{JSON.stringify(item)}</div>
       ))}
-      <img src="/images/rafael.svg" alt="Rafael's cartoon" />
+      <Image
+        width={190}
+        height={190}
+        objectFit="cover"
+        src="/images/rafael.svg"
+        alt="Rafael's cartoon"
+      />
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await fetch('http://localhost:3000/api/projects');
-  const projects: Projects[] = await data.json();
+  await connectToDb();
+  const projects = await Project.find({});
+
   return {
     props: {
-      projects: projects ?? [],
+      projects: JSON.parse(JSON.stringify(projects)) ?? [],
     },
     revalidate: 60 * 60 * 24 * 30, //month
   };
