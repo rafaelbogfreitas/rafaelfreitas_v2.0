@@ -5,7 +5,7 @@ export const getProjects = () => async (
   dispatch: Dispatch<projectsDispatchActions>
 ): Promise<void> => {
   try {
-    const response = await fetch('http://localhost:3000/api/projects');
+    const response = await fetch(`${process.env.BASE_URL}api/projects`);
     const projects = await response.json();
 
     dispatch({

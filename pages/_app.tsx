@@ -1,14 +1,17 @@
 import { Provider } from 'react-redux';
 import { ReactElement } from 'react';
 import { AppProps } from 'next/app';
-import store from '../redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '../redux/store';
 
 import '../styles/index.scss';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <PersistGate persistor={persistor}>
+        <Component {...pageProps} />
+      </PersistGate>
     </Provider>
   );
 }
