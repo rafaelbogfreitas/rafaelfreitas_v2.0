@@ -6,7 +6,7 @@ import { RootStore } from '../redux/store';
 import { increaseCounter, decreaseCounter } from '../redux/actions/counter';
 import { ReactElement } from 'react';
 import connectToDb from '../database/connectToDb';
-import Project from '../database/models';
+import { Project } from '../database/models';
 
 type Text = {
   ptBr: string;
@@ -32,7 +32,7 @@ type HomeProps = {
 
 const Home = ({ projects }: HomeProps): ReactElement => {
   const dispatch = useDispatch();
-  const { count } = useSelector((state: RootStore) => state);
+  const { counter: count } = useSelector((state: RootStore) => state);
 
   const increaseCount = (): void => {
     dispatch(increaseCounter());

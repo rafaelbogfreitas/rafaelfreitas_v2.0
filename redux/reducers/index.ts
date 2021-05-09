@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
+import auth from './auth';
 import counter from './counter';
 import projects from './projects';
 
 const rootReducer = combineReducers({
-  count: counter,
-  projects: projects,
+  counter,
+  projects,
+  auth,
 });
 
 export default rootReducer;
