@@ -4,6 +4,9 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { RootStore } from '../../redux/store';
 import { logout } from '../../redux/actions/auth';
+
+import connectToDb from '../../database/connectToDb';
+import { Project } from '../../database/models';
 interface ProjectsList {
   _id: string;
   title: string;
@@ -36,12 +39,12 @@ const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(`${process.env.BASE_URL}api/projects/list`);
-  const list = await response.json();
+  await connectToDb();
+  const list = await Project.find({}, { title: 1 });
 
   return {
     props: {
-      projectsList: list,
+      projectsList: JSON.parse(JSON.stringify(list)) ?? [],
     },
     revalidate: 60 * 60,
   };
