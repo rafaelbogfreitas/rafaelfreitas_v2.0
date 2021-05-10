@@ -34,7 +34,6 @@
     "sass": "^1.32.11"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/bcrypt": "^3.0.1",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/redux-logger": "^3.0.8",
