@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 import connectToDb from '../../../database/connectToDb';
 import { User } from '../../../database/models';
