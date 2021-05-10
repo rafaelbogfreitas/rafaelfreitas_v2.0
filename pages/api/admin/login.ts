@@ -32,6 +32,6 @@ export default async function login(
     }
     res.status(401).json({ message: 'Wrong email or password' });
   } catch (err) {
-    res.json({ message: 'Something went wrong', err });
+    res.status(500).json({ message: 'Something went wrong', err });
   }
 }

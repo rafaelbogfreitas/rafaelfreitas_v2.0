@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import authenticated from '../authenticated';
+import authenticated from '../../../api/authenticated';
 import connectToDb from '../../../database/connectToDb';
 import { Project } from '../../../database/models';
 
