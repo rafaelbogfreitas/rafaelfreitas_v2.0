@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { useSelector, useDispatch } from 'react-redux';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -27,14 +28,19 @@ const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
   }
 
   return (
-    <div>
-      {projectsList.map((project, i) => (
-        <div key={i}>{project.title}</div>
-      ))}
-      <button type="button" onClick={() => dispatch(logout())}>
-        Logout
-      </button>
-    </div>
+    <>
+      <Head>
+        <title>Admin | Home</title>
+      </Head>
+      <div>
+        {projectsList.map((project, i) => (
+          <div key={i}>{project.title}</div>
+        ))}
+        <button type="button" onClick={() => dispatch(logout())}>
+          Logout
+        </button>
+      </div>
+    </>
   );
 };
 
