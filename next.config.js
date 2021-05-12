@@ -12,5 +12,5 @@ module.exports = {
       }
     ]
   },
-  pageExtensions: ['tsx'],
+  pageExtensions: ['tsx', 'ts'],
 };
