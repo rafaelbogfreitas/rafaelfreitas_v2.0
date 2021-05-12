@@ -20,8 +20,8 @@ const Login = (): JSX.Element => {
     <>
       <Head>
         <title>Login</title>
-        <LoginForm />
       </Head>
+      <LoginForm />
     </>
   );
 };
