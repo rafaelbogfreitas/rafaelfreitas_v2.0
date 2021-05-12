@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootStore } from '../redux/store';
-import { increaseCounter, decreaseCounter } from '../redux/actions/counter';
+import { RootState } from '../store';
+import { increaseCounter, decreaseCounter } from '../store/Counter.store';
 import { ReactElement } from 'react';
 import connectToDb from '../database/connectToDb';
 import { Project } from '../database/models';
@@ -32,7 +32,7 @@ type HomeProps = {
 
 const Home = ({ projects }: HomeProps): ReactElement => {
   const dispatch = useDispatch();
-  const { counter: count } = useSelector((state: RootStore) => state);
+  const { counter } = useSelector((state: RootState) => state);
 
   const increaseCount = (): void => {
     dispatch(increaseCounter());
@@ -47,7 +47,7 @@ const Home = ({ projects }: HomeProps): ReactElement => {
       <Head>
         <title>Rafael</title>
       </Head>
-      <h1>{count}</h1>
+      <h1>{counter.value}</h1>
       <button onClick={increaseCount}>INCREASE</button>
       <button onClick={decreaseCount}>DECREASE</button>
       {projects.map((item, i) => (

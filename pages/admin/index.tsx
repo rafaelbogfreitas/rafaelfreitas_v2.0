@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { useSelector, useDispatch } from 'react-redux';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { RootStore } from '../../redux/store';
-import { logout } from '../../redux/actions/auth';
+import { RootState } from '../../store';
+import { setLogout } from '../../store/Auth.store';
 
 import connectToDb from '../../database/connectToDb';
 import { Project } from '../../database/models';
@@ -18,7 +18,7 @@ interface AdminHomeProps {
 }
 
 const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
-  const { authToken } = useSelector((state: RootStore) => state.auth);
+  const { authToken } = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -36,7 +36,7 @@ const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
         {projectsList.map((project, i) => (
           <div key={i}>{project.title}</div>
         ))}
-        <button type="button" onClick={() => dispatch(logout())}>
+        <button type="button" onClick={() => dispatch(setLogout())}>
           Logout
         </button>
       </div>

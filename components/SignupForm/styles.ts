@@ -8,10 +8,19 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logoStyles: {
+    display: 'block',
+    width: '20%',
+    margin: '0 auto',
+  },
   paperStyles: {
     width: '50%',
-    height: '50%',
+    height: '55%',
     maxWidth: 400,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   formStyles: {
     margin: '0 auto',
