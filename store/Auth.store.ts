@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { axiosInstance } from '../api/axios';
 import { decode } from 'jsonwebtoken';
@@ -90,11 +91,12 @@ export const login = (email: string, password: string): AppThunk => {
         password,
       });
       const decodedToken = decode(data.token) as DecodedToken;
-      dispatch(loginSuceeded());
       dispatch(setLogin({ user: decodedToken.sub, token: data.token }));
+      await Router.push('/admin');
+      dispatch(loginSuceeded());
     } catch (err) {
       console.error(err);
-      loginFailed();
+      dispatch(loginFailed());
     }
   };
 };
@@ -113,6 +115,7 @@ export const signup = (name: string, email: string, password: string) => async (
       }
     );
     console.log({ signupResponse: data });
+    await Router.push('/admin/login');
     dispatch(signupSuceeded());
   } catch (err) {
     console.error(err);
