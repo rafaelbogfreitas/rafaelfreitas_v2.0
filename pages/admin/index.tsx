@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { RootState } from '../../store';
-import { setLogout } from '../../store/Auth.store';
+import { logout } from '../../store/Auth.store';
 
 import connectToDb from '../../database/connectToDb';
 import { Project } from '../../database/models';
@@ -36,7 +36,7 @@ const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
         {projectsList.map((project, i) => (
           <div key={i}>{project.title}</div>
         ))}
-        <button type="button" onClick={() => dispatch(setLogout())}>
+        <button type="button" onClick={() => dispatch(logout())}>
           Logout
         </button>
       </div>
