@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import authenticated from '../../../api/authenticated';
 // import authenticated from '../../../api/authenticated';
 import connectToDb from '../../../database/connectToDb';
 import { Project } from '../../../database/models';
@@ -17,5 +18,4 @@ const getProjectsList = async (
   }
 };
 
-// export default authenticated(getProjectsList);
-export default getProjectsList;
+export default authenticated(getProjectsList);
