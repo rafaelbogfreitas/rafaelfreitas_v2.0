@@ -98,9 +98,12 @@ export const login = (email: string, password: string): AppThunk => {
       dispatch(loginSuceeded());
       dispatch(alert(data.message));
     } catch (err) {
-      console.error(err);
       dispatch(loginFailed());
-      dispatch(alert('Email ou senha incorretos', 'error'));
+      if (err.response && err.response.status === 401) {
+        dispatch(alert(err.response.data.message, 'error'));
+      } else {
+        dispatch(alert('Something went wrong', 'error'));
+      }
     }
   };
 };
