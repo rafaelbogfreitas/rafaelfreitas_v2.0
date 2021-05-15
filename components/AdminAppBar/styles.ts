@@ -1,16 +1,21 @@
-import { makeStyles } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 
-export const useStyles = makeStyles({
-  logo: {
-    width: 50,
-    marginRight: 20,
-  },
-  logoutBtn: {
-    backgroundColor: 'white',
-    color: 'orange',
-    marginLeft: 'auto',
-  },
-  appBar: {
-    backgroundColor: 'orange',
-  },
-});
+export const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    logo: {
+      width: 50,
+      marginRight: theme.spacing(2),
+    },
+    logoutBtn: {
+      backgroundColor: 'white',
+      color: 'orange',
+    },
+    appBar: {
+      backgroundColor: 'orange',
+    },
+    title: {
+      flexGrow: 1,
+      fontWeight: 'bold',
+    },
+  })
+);

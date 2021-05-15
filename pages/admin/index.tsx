@@ -8,12 +8,13 @@ import { RootState } from '../../store';
 import connectToDb from '../../database/connectToDb';
 import { Project } from '../../database/models';
 import AdminAppBar from '../../components/AdminAppBar';
-interface ProjectsList {
+import ProjectsList from '../../components/ProjectsList';
+interface Projects {
   _id: string;
   title: string;
 }
 interface AdminHomeProps {
-  projectsList: ProjectsList[];
+  projectsList: Projects[];
 }
 
 const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
@@ -30,11 +31,7 @@ const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
         <title>Admin | Home</title>
       </Head>
       <AdminAppBar />
-      <div>
-        {projectsList.map((project, i) => (
-          <div key={i}>{project.title}</div>
-        ))}
-      </div>
+      <ProjectsList projectsList={projectsList} />
     </>
   );
 };

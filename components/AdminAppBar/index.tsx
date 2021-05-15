@@ -17,7 +17,9 @@ const AdminAppBar = (): JSX.Element => {
           src="/rf_logo.svg"
           alt="rafael freitas logo"
         />
-        <Typography variant="body1">Rafael Freitas</Typography>
+        <Typography className={classes.title} variant="body1">
+          Rafael Freitas
+        </Typography>
         <Button
           variant="contained"
           onClick={() => dispatch(logout())}
