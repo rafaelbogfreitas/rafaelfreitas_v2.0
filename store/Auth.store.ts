@@ -4,6 +4,8 @@ import { axiosInstance } from '../api/axios';
 import { decode } from 'jsonwebtoken';
 import { AppDispatch, AppThunk } from '.';
 
+import { alert } from './Alert.store';
+
 interface InitialState {
   user: User | null;
   authToken: string | null;
@@ -51,8 +53,8 @@ export const authSlice = createSlice({
   },
 });
 
+const { setLogout } = authSlice.actions;
 export const {
-  setLogout,
   loginFailed,
   loginSuceeded,
   setLogin,
@@ -94,9 +96,11 @@ export const login = (email: string, password: string): AppThunk => {
       dispatch(setLogin({ user: decodedToken.sub, token: data.token }));
       await Router.push('/admin');
       dispatch(loginSuceeded());
+      dispatch(alert(data.message));
     } catch (err) {
       console.error(err);
       dispatch(loginFailed());
+      dispatch(alert('Email ou senha incorretos', 'error'));
     }
   };
 };
@@ -121,4 +125,9 @@ export const signup = (name: string, email: string, password: string) => async (
     console.error(err);
     dispatch(signupFailed());
   }
+};
+
+export const logout = () => (dispatch: AppDispatch): void => {
+  dispatch(setLogout());
+  dispatch(alert('Logout efetuado com sucesso', 'success'));
 };
