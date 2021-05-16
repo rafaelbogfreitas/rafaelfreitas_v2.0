@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetServerSideProps, GetStaticPaths } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
@@ -60,23 +60,23 @@ const EditProject = ({ project }: EditProjectProps): JSX.Element => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  await connectToDb();
-  const list = await Project.find({});
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   await connectToDb();
+//   const list = await Project.find({});
 
-  const paths = list.map((item) => {
-    return {
-      params: {
-        projectId: String(item._id),
-      },
-    };
-  });
+//   const paths = list.map((item) => {
+//     return {
+//       params: {
+//         projectId: String(item._id),
+//       },
+//     };
+//   });
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const id = ctx.params?.projectId;
