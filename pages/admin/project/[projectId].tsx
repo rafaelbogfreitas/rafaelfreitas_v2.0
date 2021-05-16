@@ -12,7 +12,7 @@ import ProjectForm from '../../../components/ProjectForm';
 import Head from 'next/head';
 
 type Text = {
-  ptBr: string;
+  ptbr: string;
   eng: string;
 };
 
@@ -25,7 +25,7 @@ type Project = {
   extraLink: boolean;
   imgSrc: string;
   paragraphs: Text[];
-  extraParagraph: Text[];
+  extraParagraph: boolean;
   technologies: string[];
 };
 
@@ -57,24 +57,6 @@ const EditProject = ({ project }: EditProjectProps): JSX.Element => {
     </>
   );
 };
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   await connectToDb();
-//   const list = await Project.find({});
-
-//   const paths = list.map((item) => {
-//     return {
-//       params: {
-//         projectId: String(item._id),
-//       },
-//     };
-//   });
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const id = ctx.params?.projectId;

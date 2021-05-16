@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 type Text = {
-  ptBr: string;
+  ptbr: string;
   eng: string;
 };
 
@@ -23,8 +23,8 @@ type Project = {
   alt: string;
   extraLink?: boolean;
   imgSrc: string;
-  paragraphs?: Text[];
-  extraParagraph?: Text[];
+  paragraphs: Text[];
+  extraParagraph?: boolean;
   technologies: string[];
 };
 
@@ -41,6 +41,8 @@ type FormikInitialValues = {
   alt: string;
   img: string;
   technologies: string;
+  ptbrContent: string;
+  engContent: string;
 };
 
 const ProjectForm = ({
@@ -59,6 +61,8 @@ const ProjectForm = ({
     alt: '',
     img: '',
     technologies: '',
+    ptbrContent: '',
+    engContent: '',
   };
 
   if (edit && project) {
@@ -69,8 +73,26 @@ const ProjectForm = ({
       alt: project.alt,
       img: project.imgSrc,
       technologies: project.technologies.join(', '),
+      ptbrContent: project.paragraphs.map((item) => item.ptbr).join('\n'),
+      engContent: project.paragraphs.map((item) => item.eng).join('\n'),
     };
   }
+
+  const prepareContentToSubmit = (
+    ptbrArr: string[],
+    engArr: string[]
+  ): Text[] => {
+    let result: Text[] = [];
+    const longestContentLength = Math.max(ptbrArr.length, engArr.length);
+
+    for (let i = 0; i < longestContentLength; i++) {
+      const ptbr = ptbrArr[i] || '';
+      const eng = engArr[i] || '';
+
+      result = [...result, { ptbr, eng }];
+    }
+    return result;
+  };
 
   const handleSubmit = async (values: FormikInitialValues): Promise<void> => {
     const method = edit ? axiosInstance.patch : axiosInstance.put;
@@ -80,6 +102,10 @@ const ProjectForm = ({
       linkGitHub: values.github,
       imgSrc: values.img,
       technologies: values.technologies.split(', '),
+      paragraphs: prepareContentToSubmit(
+        values.ptbrContent.split('\n'),
+        values.engContent.split('\n')
+      ),
     };
 
     if (project) {
@@ -102,8 +128,8 @@ const ProjectForm = ({
         router.push('/admin');
       }
     } catch (err) {
-      console.log(err);
-      alert(err?.response?.message, 'error');
+      console.log(err.response);
+      dispatch(alert(err.response.data.message, 'error'));
     }
   };
 
@@ -155,6 +181,22 @@ const ProjectForm = ({
             component={TextField}
             name="technologies"
             label="Technologies"
+          />
+          <Field
+            fullWidth
+            multiline
+            variant="outlined"
+            component={TextField}
+            name="ptbrContent"
+            label="Conteúdo - Português"
+          />
+          <Field
+            fullWidth
+            multiline
+            variant="outlined"
+            component={TextField}
+            name="engContent"
+            label="Conteúdo - Inglês"
           />
           <Link href="/admin">
             <Button variant="contained" className={classes.buttonStyles}>
