@@ -43,13 +43,17 @@ const EditProject = ({ project }: EditProjectProps): JSX.Element => {
     router.push('/admin/login');
   }
 
+  const refreshData = (): void => {
+    router.replace(router.asPath);
+  };
+
   return (
     <>
       <Head>
         <title>{project.title}</title>
       </Head>
       <AdminAppBar title={title} />
-      <ProjectForm project={project} />
+      <ProjectForm project={project} refreshData={refreshData} />
     </>
   );
 };
