@@ -29,6 +29,7 @@ type Project = {
 
 interface ProjectFormProps {
   project: Project;
+  refreshData: () => void;
 }
 
 type FormikInitialValues = {
@@ -40,7 +41,10 @@ type FormikInitialValues = {
   technologies: string;
 };
 
-const ProjectForm = ({ project }: ProjectFormProps): JSX.Element => {
+const ProjectForm = ({
+  project,
+  refreshData,
+}: ProjectFormProps): JSX.Element => {
   const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -72,6 +76,7 @@ const ProjectForm = ({ project }: ProjectFormProps): JSX.Element => {
       });
 
       dispatch(alert(data.message));
+      refreshData();
     } catch (err) {
       console.log(err);
       alert(err?.response?.message, 'error');
