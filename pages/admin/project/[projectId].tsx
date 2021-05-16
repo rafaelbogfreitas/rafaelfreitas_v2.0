@@ -8,6 +8,8 @@ import connectToDb from '../../../database/connectToDb';
 import { Project } from '../../../database/models';
 
 import AdminAppBar from '../../../components/AdminAppBar';
+import ProjectForm from '../../../components/ProjectForm';
+import Head from 'next/head';
 
 type Text = {
   ptBr: string;
@@ -18,7 +20,7 @@ type Project = {
   _id: string;
   title: string;
   href: string;
-  linkGithub: string;
+  linkGitHub: string;
   alt: string;
   extraLink: boolean;
   imgSrc: string;
@@ -36,8 +38,6 @@ const EditProject = ({ project }: EditProjectProps): JSX.Element => {
   const { auth } = useSelector((state: RootState) => state);
 
   const { title } = project;
-  console.log(project);
-  console.log(title);
 
   if (!auth.authToken) {
     router.push('/admin/login');
@@ -45,8 +45,11 @@ const EditProject = ({ project }: EditProjectProps): JSX.Element => {
 
   return (
     <>
+      <Head>
+        <title>{project.title}</title>
+      </Head>
       <AdminAppBar title={title} />
-      <div>{JSON.stringify(project.href)}</div>
+      <ProjectForm project={project} />
     </>
   );
 };
