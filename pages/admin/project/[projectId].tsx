@@ -44,7 +44,9 @@ const EditProject = ({ project }: EditProjectProps): JSX.Element => {
   }
 
   const refreshData = (): void => {
-    router.replace(router.asPath);
+    setTimeout(() => {
+      router.replace(router.asPath);
+    }, 1000);
   };
 
   return (
