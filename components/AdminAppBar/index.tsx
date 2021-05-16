@@ -21,11 +21,13 @@ const AdminAppBar = ({ title }: AdminAppBarProps): JSX.Element => {
   return (
     <AppBar position="sticky" className={classes.appBar}>
       <Toolbar>
-        <img
-          className={classes.logo}
-          src="/rf_logo.svg"
-          alt="rafael freitas logo"
-        />
+        <Link href="/admin">
+          <img
+            className={classes.logo}
+            src="/rf_logo.svg"
+            alt="rafael freitas logo"
+          />
+        </Link>
         <Typography className={classes.title} variant="body1">
           {title}
         </Typography>

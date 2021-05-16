@@ -4,14 +4,17 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
   ListSubheader,
   Paper,
 } from '@material-ui/core';
-import { Edit } from '@material-ui/icons';
+import { Delete, Edit } from '@material-ui/icons';
 
 import { useStyles } from './styles';
+import { axiosInstance } from '../../api/axios';
+import { alert } from '../../store/Alert.store';
 
 interface ProjectsList {
   _id: string;
@@ -24,6 +27,23 @@ interface ProjectsListProps {
 
 const ProjectsList = ({ projectsList }: ProjectsListProps): JSX.Element => {
   const classes = useStyles();
+
+  const handleDelete = async (projectId: string): Promise<void> => {
+    try {
+      const { data } = await axiosInstance.delete('projects/delete', {
+        params: {
+          projectId,
+        },
+      });
+      alert(data.message);
+    } catch (err) {
+      console.error(err);
+      if (err && err.response && err.response.message) {
+        alert(err.response.message, 'error');
+      }
+    }
+  };
+
   return (
     <Paper elevation={3} className={classes.paperStyles}>
       <List
@@ -41,10 +61,17 @@ const ProjectsList = ({ projectsList }: ProjectsListProps): JSX.Element => {
         {projectsList.map((item) => (
           <Link key={item._id} href={`admin/project/${item._id}`}>
             <ListItem button>
+              <ListItemIcon>
+                <Edit />
+              </ListItemIcon>
               <ListItemText>{item.title}</ListItemText>
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="edit">
-                  <Edit />
+                <IconButton
+                  onClick={() => handleDelete(item._id)}
+                  edge="end"
+                  aria-label="delete"
+                >
+                  <Delete />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
