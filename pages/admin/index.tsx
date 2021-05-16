@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { RootState } from '../../store';
 
@@ -36,7 +36,7 @@ const AdminHome = ({ projectsList }: AdminHomeProps): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   await connectToDb();
   const list = await Project.find({}, { title: 1 });
 
@@ -44,7 +44,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       projectsList: JSON.parse(JSON.stringify(list)) ?? [],
     },
-    revalidate: 1,
   };
 };
 
