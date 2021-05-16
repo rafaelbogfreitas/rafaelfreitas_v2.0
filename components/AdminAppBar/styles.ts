@@ -6,9 +6,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       width: 50,
       marginRight: theme.spacing(2),
     },
-    logoutBtn: {
+    btnStyles: {
       backgroundColor: 'white',
       color: 'orange',
+      marginRight: theme.spacing(2),
     },
     appBar: {
       backgroundColor: 'orange',

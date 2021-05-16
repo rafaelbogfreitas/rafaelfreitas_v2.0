@@ -55,7 +55,7 @@ const EditProject = ({ project }: EditProjectProps): JSX.Element => {
         <title>{project.title}</title>
       </Head>
       <AdminAppBar title={title} />
-      <ProjectForm project={project} refreshData={refreshData} />
+      <ProjectForm edit project={project} refreshData={refreshData} />
     </>
   );
 };
@@ -74,7 +74,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: 'blocking',
+    fallback: false,
   };
 };
 
@@ -83,6 +83,13 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   await connectToDb();
   const [project] = await Project.find({ _id: id });
+
+  if (!project) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       project: JSON.parse(JSON.stringify(project)),

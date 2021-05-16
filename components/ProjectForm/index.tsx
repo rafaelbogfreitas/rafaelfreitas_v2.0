@@ -4,10 +4,11 @@ import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 
 import { useStyles } from './styles';
-import { useRouter } from 'next/router';
 import { axiosInstance } from '../../api/axios';
 import { useDispatch } from 'react-redux';
 import { alert } from '../../store/Alert.store';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Text = {
   ptBr: string;
@@ -15,21 +16,22 @@ type Text = {
 };
 
 type Project = {
-  _id: string;
+  _id?: string;
   title: string;
   href: string;
   linkGitHub: string;
   alt: string;
-  extraLink: boolean;
+  extraLink?: boolean;
   imgSrc: string;
-  paragraphs: Text[];
-  extraParagraph: Text[];
+  paragraphs?: Text[];
+  extraParagraph?: Text[];
   technologies: string[];
 };
 
 interface ProjectFormProps {
-  project: Project;
+  project?: Project;
   refreshData: () => void;
+  edit?: boolean;
 }
 
 type FormikInitialValues = {
@@ -44,39 +46,61 @@ type FormikInitialValues = {
 const ProjectForm = ({
   project,
   refreshData,
+  edit = false,
 }: ProjectFormProps): JSX.Element => {
   const classes = useStyles();
-  const router = useRouter();
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  const formikInitialValues = {
-    title: project.title,
-    github: project.linkGitHub,
-    href: project.href,
-    alt: project.alt,
-    img: project.imgSrc,
-    technologies: project.technologies.join(', '),
+  let formikInitialValues = {
+    title: '',
+    github: '',
+    href: '',
+    alt: '',
+    img: '',
+    technologies: '',
   };
 
-  const handleGoBack = (): void => {
-    router.back();
-  };
+  if (edit && project) {
+    formikInitialValues = {
+      title: project.title,
+      github: project.linkGitHub,
+      href: project.href,
+      alt: project.alt,
+      img: project.imgSrc,
+      technologies: project.technologies.join(', '),
+    };
+  }
 
   const handleSubmit = async (values: FormikInitialValues): Promise<void> => {
-    const updatedData = {
-      _id: project._id,
+    const method = edit ? axiosInstance.patch : axiosInstance.put;
+    const endpoint = edit ? '/projects/update' : '/projects/create';
+    let updatedData: Project = {
       ...values,
       linkGitHub: values.github,
       imgSrc: values.img,
       technologies: values.technologies.split(', '),
     };
+
+    if (project) {
+      updatedData = {
+        _id: project._id,
+        ...updatedData,
+      };
+    }
+
     try {
-      const { data } = await axiosInstance.patch('/projects/update', {
+      const { data } = await method(endpoint, {
         ...updatedData,
       });
 
       dispatch(alert(data.message));
+
       refreshData();
+
+      if (!edit) {
+        router.push('/admin');
+      }
     } catch (err) {
       console.log(err);
       alert(err?.response?.message, 'error');
@@ -132,13 +156,11 @@ const ProjectForm = ({
             name="technologies"
             label="Technologies"
           />
-          <Button
-            variant="contained"
-            className={classes.buttonStyles}
-            onClick={handleGoBack}
-          >
-            Voltar
-          </Button>
+          <Link href="/admin">
+            <Button variant="contained" className={classes.buttonStyles}>
+              Voltar
+            </Button>
+          </Link>
           <Button
             variant="contained"
             className={classes.buttonStyles}
