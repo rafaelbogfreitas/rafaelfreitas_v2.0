@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       projectsList: JSON.parse(JSON.stringify(list)) ?? [],
     },
-    revalidate: 60 * 60,
+    revalidate: 1,
   };
 };
 

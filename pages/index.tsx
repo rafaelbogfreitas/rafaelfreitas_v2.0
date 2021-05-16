@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       projects: JSON.parse(JSON.stringify(projects)) ?? [],
     },
-    revalidate: 60 * 60 * 24 * 30, //month
+    revalidate: 1,
   };
 };
 

@@ -81,7 +81,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       project: JSON.parse(JSON.stringify(project)),
     },
-    revalidate: 60 * 60,
+    revalidate: 1,
   };
 };
 
