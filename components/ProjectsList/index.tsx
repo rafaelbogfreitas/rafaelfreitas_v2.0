@@ -15,6 +15,7 @@ import { Delete, Edit } from '@material-ui/icons';
 import { useStyles } from './styles';
 import { axiosInstance } from '../../api/axios';
 import { alert } from '../../store/Alert.store';
+import { useRouter } from 'next/router';
 
 interface ProjectsList {
   _id: string;
@@ -27,6 +28,11 @@ interface ProjectsListProps {
 
 const ProjectsList = ({ projectsList }: ProjectsListProps): JSX.Element => {
   const classes = useStyles();
+  const router = useRouter();
+
+  const refreshData = (): void => {
+    router.replace(router.asPath);
+  };
 
   const handleDelete = async (projectId: string): Promise<void> => {
     try {
@@ -35,6 +41,7 @@ const ProjectsList = ({ projectsList }: ProjectsListProps): JSX.Element => {
           projectId,
         },
       });
+      refreshData();
       alert(data.message);
     } catch (err) {
       console.error(err);

@@ -5,12 +5,11 @@ import Head from 'next/head';
 import AdminAppBar from '../../../components/AdminAppBar';
 import ProjectForm from '../../../components/ProjectForm';
 
-const NewProject = () => {
+const NewProject = (): JSX.Element => {
   const router = useRouter();
+
   const refreshData = (): void => {
-    setTimeout(() => {
-      router.replace(router.asPath);
-    }, 1000);
+    router.replace(router.asPath);
   };
 
   return (
