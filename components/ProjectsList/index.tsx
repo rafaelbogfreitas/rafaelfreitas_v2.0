@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import {
   IconButton,
   List,
@@ -27,21 +28,27 @@ const ProjectsList = ({ projectsList }: ProjectsListProps): JSX.Element => {
     <Paper elevation={3} className={classes.paperStyles}>
       <List
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
+          <ListSubheader
+            className={classes.headerStyles}
+            component="div"
+            id="nested-list-subheader"
+          >
             Projetos
           </ListSubheader>
         }
         className={classes.listStyle}
       >
         {projectsList.map((item) => (
-          <ListItem key={item._id} button>
-            <ListItemText>{item.title}</ListItemText>
-            <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="edit">
-                <Edit />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+          <Link key={item._id} href={`admin/project/${item._id}`}>
+            <ListItem button>
+              <ListItemText>{item.title}</ListItemText>
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="edit">
+                  <Edit />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Paper>

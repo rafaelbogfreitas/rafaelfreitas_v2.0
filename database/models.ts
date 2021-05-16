@@ -5,15 +5,7 @@ const { model } = mongoose;
 //schemas
 import { projectSchema, userSchema } from './schemas';
 
-if (mongoose.modelNames().includes('Project')) {
-  mongoose.deleteModel('Project');
-}
-
-if (mongoose.modelNames().includes('user')) {
-  mongoose.deleteModel('user');
-}
-
-const User = model('user', userSchema);
-const Project = model('Project', projectSchema);
+const User = mongoose.models?.User || model('User', userSchema);
+const Project = mongoose.models?.Project || model('Project', projectSchema);
 
 export { User, Project };

@@ -5,7 +5,11 @@ import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { logout } from '../../store/Auth.store';
 
-const AdminAppBar = (): JSX.Element => {
+interface AdminAppBarProps {
+  title?: string;
+}
+
+const AdminAppBar = ({ title }: AdminAppBarProps): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -18,7 +22,7 @@ const AdminAppBar = (): JSX.Element => {
           alt="rafael freitas logo"
         />
         <Typography className={classes.title} variant="body1">
-          Rafael Freitas
+          {title}
         </Typography>
         <Button
           variant="contained"
