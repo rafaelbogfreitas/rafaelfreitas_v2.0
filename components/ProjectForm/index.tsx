@@ -128,7 +128,7 @@ const ProjectForm = ({
         router.push('/admin');
       }
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
       dispatch(alert(err.response.data.message, 'error'));
     }
   };

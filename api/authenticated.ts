@@ -15,7 +15,7 @@ const authenticated = (fn: NextApiHandler) => async (
           resolve();
         }
 
-        res.status(401).json({ message: 'Please login to get a valid token' });
+        res.status(403).json({ message: 'Please login to get a valid token' });
         resolve();
       }
     );
