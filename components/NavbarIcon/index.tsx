@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './navbarIcon.module.scss';
+import styles from './navbaricon.module.scss';
 
 interface NavbarIconProps {
   size?: number;
