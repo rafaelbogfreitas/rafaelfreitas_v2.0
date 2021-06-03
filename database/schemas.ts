@@ -1,12 +1,12 @@
-import { Document, Schema } from 'mongoose';
+import { Document, Schema, Model } from 'mongoose';
 
-interface User extends Document {
+interface UserDocument extends Document {
   name: string;
   email: string;
   password: string;
 }
 
-export const userSchema = new Schema<User>({
+export const userSchema = new Schema<UserDocument, Model<UserDocument>>({
   name: {
     type: String,
     required: true,

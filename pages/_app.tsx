@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../store';
 
 import CustomAlert from '../components/Alert';
+
 import '../styles/index.scss';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {

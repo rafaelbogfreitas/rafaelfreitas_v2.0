@@ -20,7 +20,6 @@ import storage from 'redux-persist/lib/storage';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
 
 import { authSlice } from './Auth.store';
-import { counterSlice } from './Counter.store';
 import { alertSlice } from './Alert.store';
 
 const encryptor = encryptTransform({
@@ -40,7 +39,6 @@ const persistConfig = {
 const reducers = combineReducers({
   alert: alertSlice.reducer,
   auth: authSlice.reducer,
-  counter: counterSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -1,30 +1,50 @@
-html {
-  @include small {
-    font-size: 12px;
-  }
-}
+:root {
+  --main_color: orange;
+  --secondary_color: white;
+  --gray_color: #4d4b45;
+  --light_gray_color: #8f8b81;
+  --gradient:
+    to right,
+    $secondary-color,
+    lighten($secondary-color, 5%),
+    lighten($secondary-color, 10%),
+    lighten($secondary-color, 20%),
+    lighten($secondary-color, 30%),
+    orange;
 
-body {
-  height: 90%;
-  margin: 0 auto;
+  //spacing
+  
+  --sml-spacing: 20px;
+  --md-spacing: 40px;
+  --lg-spacing: 60px;
+
+  //font
+  
   font-family: 'Roboto Mono', monospace, mono;
+
+  //breakpoints
+  
+  --sml-bp: 600px;
+  --md-bp: 960px;
+  --lg-bp: 1280px;
+  --xl-bp: 1920px;
 }
 
-h1,h2,h3,h4,h5,h6 {
-  color:$secondary-color;
-}
-
-h1{
-  font-size: 4rem;
-  margin-top: 50px;
-}
-
-p {
-  font-size: 1rem;
-  line-height: 1.5;
+* {
+  box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
   color:inherit;
+}
+
+.active {
+  color: var(--main_color);
+}
+
+@media (max-width: 600px) {
+  .active {
+    color: var(--gray_color);
+  }
 }
